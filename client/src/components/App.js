@@ -7,6 +7,7 @@ import LoginPage from "./views/LoginPage/LoginPage.js";
 import RegisterPage from "./views/RegisterPage/RegisterPage.js";
 import NavBar from "./views/NavBar/NavBar";
 import Footer from "./views/Footer/Footer"
+import VideoUploadPage from "./views/VideoUploadPage/VideoUploadPage"
 
 function App() {
   return (
@@ -15,8 +16,9 @@ function App() {
       <div style={{ paddingTop: '69px', minHeight: 'calc(100vh - 80px)' }}>
         <Switch>
           <Route exact path="/" component={Auth(LandingPage, null)} />
-          <Route exact path="/login" component={Auth(LoginPage, false)} />
+          <Route exact path="/login" component={Auth(LoginPage, false)} /> 
           <Route exact path="/register" component={Auth(RegisterPage, false)} />
+          <Route exact path="/video/upload" component={Auth(VideoUploadPage, true)} />
         </Switch>
       </div>
       <Footer />
@@ -25,3 +27,6 @@ function App() {
 }
 
 export default App;
+
+//null: 로그인 안해도 다 가능
+//true: 로그인 한 사람만 입장 가능
