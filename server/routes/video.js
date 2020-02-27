@@ -39,8 +39,10 @@ router.post("/uploadfiles", (req, res) => {
         if (err) {
             return res.json({ success: false, err }) //실패시
         }
-        return res.json({ success: true, filePath: res.req.file.path, fileName: res.req.file.filename })
+        return res.json({ success: true, filePath: res.req.file.path, fileName: res.req.file.filename }) //성공시
+        
     })
+
 });
 
 router.post("/thumbnail", (req, res) => {
@@ -58,7 +60,7 @@ router.post("/thumbnail", (req, res) => {
         fileDuration = metadata.format.duration;
     })
 
-    //썸네일 생성
+    //썸네일 
     ffmpeg(req.body.filePath)
         .on('filenames', function (filenames) {
             console.log('Will generate ' + filenames.join(', '))
