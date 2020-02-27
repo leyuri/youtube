@@ -35,7 +35,7 @@ if(Video.writer){
                     <video style={{ width: '100%' }} src={`http://localhost:5000/${Video.filePath}`} controls></video>
 
                     <List.Item
-                        actions={[<Subscribe />]}
+                        actions={[<Subscribe userTo={Video.writer._id } />]}
                     >
                         <List.Item.Meta
                             avatar={<Avatar src={Video.writer && Video.writer.image} />}

@@ -1,6 +1,34 @@
-import React from 'react'
+import React from 'react';
+import axios from 'axios';
+import { response } from 'express';
 
-function Subscribe() {
+function Subscribe(props) {
+
+
+    const [SubscribeNumber, setSubscribeNumber] = useState(initialState)
+
+    useEffect(() => {
+
+        let variable = { userTo: props.userTo }
+
+        axios.post('/api/subscribe/subscribeNumber', variable)
+        .then( response => {
+            if(response.data.success) {
+                setSubscribeNumber(response.data.subscribeNumber)
+            } else {
+                alert('Failed to subscriber number.')
+            }
+        })
+
+    }, [])
+
+
+
+
+
+
+
+
     return (
         <div>
             <button
