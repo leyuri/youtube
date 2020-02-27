@@ -14,14 +14,14 @@ function App() {
   return (
     <Suspense fallback={(<div>Loading...</div>)}>
       <NavBar />
-      <div style={{ paddingTop: '69px', minHeight: 'calc(100vh - 80px)' }}>
+      <div style={{ paddingTop: '75px', minHeight: 'calc(100vh - 80px)' }}>
         <Switch>
           <Route exact path="/" component={Auth(LandingPage, null)} />
-          <Route exact path="/login" component={Auth(LoginPage, false)} /> 
+          <Route exact path="/login" component={Auth(LoginPage, false)} />
           <Route exact path="/register" component={Auth(RegisterPage, false)} />
           <Route exact path="/video/upload" component={Auth(VideoUploadPage, true)} />
-          <Route exact path="/video/:videoId" component={Auth(VideoDetailPage, null)} /> 
-          {/* VideoDetailPage 아무나 들어갈 수 있도록  */}
+          <Route exact path="/video/:videoId" component={Auth(VideoDetailPage, null)} />
+
         </Switch>
       </div>
       <Footer />
@@ -30,6 +30,3 @@ function App() {
 }
 
 export default App;
-
-//null: 로그인 안해도 다 가능
-//true: 로그인 한 사람만 입장 가능

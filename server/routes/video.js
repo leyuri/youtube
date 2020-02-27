@@ -78,6 +78,20 @@ router.post("/thumbnail", (req, res) => {
 
 
 
+
+router.get("/getVideos", (req, res) => {
+
+    Video.find()
+        .populate('writer')
+        .exec((err, videos) => {
+            if(err) return res.status(400).send(err);
+            res.status(200).json({ success: true, videos })
+        })
+
+});
+
+
+
 router.post("/uploadVideo", (req, res) => {
 // 클라이언트에서 받은 정보를 monogodb에 저장
     const video = new Video(req.body)
@@ -91,20 +105,16 @@ router.post("/uploadVideo", (req, res) => {
 
 });
 
-router.get("/getVideos", (req, res) => {
-    // 비디오를  monogodb 에서 가져와서 클라이언트에 보낸다
 
-        Video.find()
-            .populate('writer')
-            .exec((err, videos) => {
-                if(err) 
-                return res.status(400).send(err);
-                res.status(200).json({ success: true, videos })
-            })
-
+router.post("/getVideo", (req, res) => {
+// 비디오를  monogodb 에서 가져와서 클라이언트에 보낸다
+    Video.findOne({ "_id" : req.body.videoId })
+    .populate('writer')
+    .exec((err, video) => {
+        if(err) return res.status(400).send(err);
+        res.status(200).json({ success: true, video })
+    })
 });
-    
-
 
 
 module.exports = router;

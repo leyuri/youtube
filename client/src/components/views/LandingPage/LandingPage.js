@@ -5,9 +5,7 @@ import axios from 'axios';
 import moment from 'moment';
 const { Title } = Typography;
 const { Meta } = Card;
-
 function LandingPage() {
-
     //state를 만들어줌
     const [Videos, setVideos] = useState([])
 
@@ -24,17 +22,17 @@ function LandingPage() {
     }, [])
 
 
+
+
     //카드모양의 형식...
     const renderCards = Videos.map((video, index) => {
-
         // 동영상 계산을 미리 해줌
         var minutes = Math.floor(video.duration / 60);
         var seconds = Math.floor(video.duration - minutes * 60);
-
         //6*4=24  8*3=24
         return <Col lg={6} md={8} xs={24}>
-            {/* 각각 동영상의 이미지 */}
             <div style={{ position: 'relative' }}>
+                <a href={`/video/${video._id}`} >
                 <img style={{ width: '100%' }} alt="thumbnail" src={`http://localhost:5000/${video.thumbnail}`} />
                 <div className=" duration"
                     style={{ bottom: 0, right:0, position: 'absolute', margin: '4px', 
@@ -42,13 +40,9 @@ function LandingPage() {
                     padding: '2px 4px', borderRadius:'2px', letterSpacing:'0.5px', fontSize:'12px',
                     fontWeight:'500', lineHeight:'12px' }}>
                     <span>{minutes} : {seconds}</span>
-                    {/* 동영상 시간 */}
                 </div>
-            </div>
-            
-            
-            <br />
-            {/* avatar 사용자 이미지 */}
+                </a>
+            </div><br />
             <Meta
                 avatar={
                     <Avatar src={video.writer.image} />
