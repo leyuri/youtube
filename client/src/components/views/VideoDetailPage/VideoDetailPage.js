@@ -27,6 +27,8 @@ function VideoDetailPage(props) {
     }, [])
 
 if(Video.writer){
+
+    const suberscribeButton = Video.writer._id !== localStorage.getItem('userId') && <Subscriber userTo={Video.writer._id} userFrom={localStorage.getItem('userId')} /> 
     return (
         <Row>
             {/* 총 24에서 18 비중 */}
@@ -35,7 +37,7 @@ if(Video.writer){
                     <video style={{ width: '100%' }} src={`http://localhost:5000/${Video.filePath}`} controls></video>
 
                     <List.Item
-                       actions={[ <Subscriber userTo={Video.writer._id} userFrom={localStorage.getItem('userId')} /> ]}
+                       actions={[ suberscribeButton ]}
                        //현재 로그인한 본인의 아이디를 가져올 수 있음
                     >
                         <List.Item.Meta
