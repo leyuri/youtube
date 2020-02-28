@@ -36,6 +36,7 @@ if(Video.writer){
 
                     <List.Item
                        actions={[ <Subscriber userTo={Video.writer._id} userFrom={localStorage.getItem('userId')} /> ]}
+                       //현재 로그인한 본인의 아이디를 가져올 수 있음
                     >
                         <List.Item.Meta
                             avatar={<Avatar src={Video.writer && Video.writer.image} />}

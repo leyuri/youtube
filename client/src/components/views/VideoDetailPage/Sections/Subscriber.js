@@ -7,6 +7,41 @@ function Subscriber(props) {
     const [SubscribeNumber, setSubscribeNumber] = useState(0)
     const [Subscribed, setSubscribed] = useState(false)
 
+    const onSubscribe = ( ) => {
+
+        let subscribeVariables = {
+                userTo : userTo,
+                userFrom : userFrom
+        }
+
+        if(Subscribed) {
+            // 이미 구독 중 일때
+            axios.post('/api/subscribe/unSubscribe', subscribeVariables)
+                .then(response => {
+                    if(response.data.success){ 
+                        setSubscribeNumber(SubscribeNumber - 1)
+                        setSubscribed(!Subscribed)
+                    } else {
+                        alert('Failed to unsubscribe')
+                    }
+                })
+
+        } else {
+            // 구독 중이 아닐 때
+            axios.post('/api/subscribe/subscribe', subscribeVariables)
+                .then(response => {
+                    if(response.data.success) {
+                        setSubscribeNumber(SubscribeNumber + 1)
+                        setSubscribed(!Subscribed)
+                    } else {
+                        alert('Failed to subscribe')
+                    }
+                })
+        }
+
+    }
+
+
     useEffect(() => {
 
         const subscribeNumberVariables = { userTo: userTo, userFrom: userFrom }
@@ -33,13 +68,14 @@ function Subscriber(props) {
 
     return (
         <div>
-            <button style={{
-                backgroundColor: `${Subscribed ? '#AAAAA' : '#CC0000'}`,
+            <button 
+            onClick={onSubscribe}
+            style={{
+                backgroundColor: `${Subscribed ? '#AAAAAA' : '#CC0000'}`,
                 borderRadius: '4px', color: 'white',
                 padding: '10px 16px', fontWeight: '500', fontSize: '1rem', textTransform: 'uppercase'
             }}>
-                {SubscribeNumber} {Subscribed ? 'Subscribed' :
-                    'Subscribe'}
+                {SubscribeNumber} {Subscribed ? 'Subscribed' : 'Subscribe'}
             </button>
         </div>
     )
