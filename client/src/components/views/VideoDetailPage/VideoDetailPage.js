@@ -3,6 +3,7 @@ import { List, Avatar, Typography, Row, Col } from 'antd';
 import axios from 'axios';
 import SideVideo from './Sections/SideVideo';
 import Subscriber from './Sections/Subscriber';
+import Comment from './Sections/Comment';
 
 function VideoDetailPage(props) {
 
@@ -48,13 +49,13 @@ if(Video.writer){
                         <div></div>
                     </List.Item>
 
+                    <Comment />
+
                 </div>
             </Col>
-            {/* 사이즈가 6 */}
             <Col lg={6} xs={24}>
 
                 <SideVideo />
-                {/* component를 만듦 */}
 
             </Col>
         </Row>
