@@ -12,7 +12,7 @@ const commentSchema = mongoose.Schema({
         ref: 'Video'
     },
     responseTo: {
-        type: SSchema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'User'
     },
     content: {
