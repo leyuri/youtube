@@ -2,6 +2,7 @@ import React , {useState}from 'react'
 import { Button, Input } from 'antd';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
+import SingleComment from './SingleComment';
 
 
 const { TextArea } = Input;
@@ -52,6 +53,10 @@ const Comment = (props) => {
             <hr />
             {/* Comment Lists  */}
             {console.log(props.CommentLists)}
+
+            <SingleComment />
+
+
 
             {/* Root Comment Form */}
             <form style={{ display: 'flex' }} onSubmit={onSubmit}>
