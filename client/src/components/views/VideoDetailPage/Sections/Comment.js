@@ -1,4 +1,4 @@
-import React , {useState}from 'react'
+import React , { useState }from 'react'
 import { Button, Input } from 'antd';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
@@ -35,15 +35,15 @@ const Comment = (props) => {
 
         // db에 정보를 넣어야 함(사용자, 댓글내용 등)
         axios.post('/api/comment/saveComment', variables)
-        .then(response=> {
-            //back-end에서 정보가...
-            if(response.data.success) {
-                setComment("")
-                props.refreshFunction(response.data.result)
-            } else {
-                alert('Failed to save Comment')
-            }
-        })
+            .then(response => {
+                if (response.data.success) {
+                    setComment("")
+                    //다시 댓글창을 비워두기 위해
+                    props.refreshFunction(response.data.result)
+                } else {
+                    alert('Failed to save Comment')
+                }
+            })
     }
 
     return (
@@ -54,7 +54,14 @@ const Comment = (props) => {
             {/* Comment Lists  */}
             {console.log(props.CommentLists)}
 
-            <SingleComment />
+            {props.CommentLists && props.CommentLists.map((comment, index) => (
+                (!comment.responseTo &&
+                    //대댓이 없는 애들만
+                    <React.Fragment>
+                        <SingleComment comment={comment} postId={props.postId} refreshFunction={props.refreshFunction} />
+                    </React.Fragment>
+                )
+            ))}
 
 
 
