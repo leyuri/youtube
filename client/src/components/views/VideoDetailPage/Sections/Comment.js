@@ -3,7 +3,7 @@ import { Button, Input } from 'antd';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import SingleComment from './SingleComment';
-
+import ReplyComment from './ReplyComment';
 
 const { TextArea } = Input;
 
@@ -58,7 +58,12 @@ const Comment = (props) => {
                 (!comment.responseTo &&
                     //대댓이 없는 애들만
                     <React.Fragment>
-                        <SingleComment comment={comment} postId={props.postId} refreshFunction={props.refreshFunction} />
+                        <SingleComment 
+                        comment={comment} 
+                        postId={props.postId} 
+                        refreshFunction={props.refreshFunction} />
+                        
+                        <ReplyComment />
                     </React.Fragment>
                 )
             ))}
