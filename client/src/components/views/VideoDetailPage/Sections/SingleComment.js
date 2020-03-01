@@ -1,13 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Comment, Avatar, Button, Input } from 'antd';
 
 const { TextArea } = Input;
 
 function SingleComment() {
+    
+    //처음에는 숨겨져 있어야 한다
+    const [OpenReplay, setOpenReplay] = useState(false)
+
+    const onClickReplayOpen = () => {
+        setOpenReplay(!OpenReplay)
+    }
+
+    const actions = [
+        <span onClick={onClickReplayOpen} key="comment-basic-replay-to"> Replay to </span>
+    ]
+
     return (
         <div>
             <Comment
-                actions
+                actions={actions}
                 author
                 avatar={<Avatar src alt/>}
                 content
@@ -15,6 +27,8 @@ function SingleComment() {
 
             </Comment>
 
+
+            {OpenReplay &&
    
                 <form style={{ display: 'flex' }} onSubmit>
                     <TextArea
@@ -26,7 +40,7 @@ function SingleComment() {
                     <br />
                     <Button style={{ width: '20%', height: '52px' }} onClick>Submit</Button>
                 </form>
-  
+            }
 
         </div>
     )
