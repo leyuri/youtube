@@ -5,12 +5,21 @@ const { TextArea } = Input;
 
 function SingleComment() {
     
-    //처음에는 숨겨져 있어야 한다
+    //처음에는 replay comment 가 숨겨져 있어야 한다
     const [OpenReplay, setOpenReplay] = useState(false)
+
+    
+    const [CommentValue, setCommentValue] = useState("")
 
     const onClickReplayOpen = () => {
         setOpenReplay(!OpenReplay)
     }
+
+    const handleChange = (e) => {
+        setCommentValue(e.currentTarget.value)
+    }
+
+
 
     const actions = [
         <span onClick={onClickReplayOpen} key="comment-basic-replay-to"> Replay to </span>
@@ -33,8 +42,8 @@ function SingleComment() {
                 <form style={{ display: 'flex' }} onSubmit>
                     <TextArea
                         style={{ width: '100%', borderRadius: '5px' }}
-                        onChange
-                        value
+                        onChange={handleChange}
+                        value={CommentValue}
                         placeholder="write some comments"
                     />
                     <br />
