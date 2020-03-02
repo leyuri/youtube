@@ -1,20 +1,16 @@
-import React , { useState }from 'react'
+import React, { useState } from 'react'
 import { Button, Input } from 'antd';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import SingleComment from './SingleComment';
 import ReplyComment from './ReplyComment';
-
 const { TextArea } = Input;
 
 
-const Comment = (props) => {
-
-
+function Comments(props) {
     const user = useSelector(state => state.user)
     //user의 정보들이 모두 담겨있음
     const [Comment, setComment] = useState("")
-
 
     //typing 한 결과가 화면
     const handleChange = (e) => {
@@ -25,13 +21,12 @@ const Comment = (props) => {
         e.preventDefault();
         //page가 refresh되지 않도록 해줌
 
-        const variables = { 
+        const variables = {
             content: Comment,
             writer: user.userData._id,
             //redux hook을 통해
-            postId: props.postId   
-         }
-
+            postId: props.postId
+        }
 
         // db에 정보를 넣어야 함(사용자, 댓글내용 등)
         axios.post('/api/comment/saveComment', variables)
@@ -58,12 +53,13 @@ const Comment = (props) => {
                 (!comment.responseTo &&
                     //대댓이 없는 애들만
                     <React.Fragment>
-                        <SingleComment 
-                        comment={comment} 
-                        postId={props.postId} 
+                        <SingleComment comment={comment} postId={props.postId} refreshFunction={props.refreshFunction} />
+                        {/* 첫번째 SingleComment를 랜더링 해준다.  */}
+                        <ReplyComment 
+                        CommentLists={props.CommentLists} 
+                        postId={props.postId} //부모 댓글의 아이디 가져오기..
+                        parentCommentId={comment._id}   //부모 댓글의 아이디 가져오기..
                         refreshFunction={props.refreshFunction} />
-                        
-                        <ReplyComment />
                     </React.Fragment>
                 )
             ))}
@@ -87,4 +83,4 @@ const Comment = (props) => {
     )
 }
 
-export default Comment
+export default Comments

@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { Comment, Avatar, Button, Input } from 'antd';
-import Axios from 'axios';
+import axios from 'axios';
 import { useSelector } from 'react-redux';
 
 
 const { TextArea } = Input;
+
 function SingleComment(props) {
     const user = useSelector(state => state.user);
     const [CommentValue, setCommentValue] = useState("")
@@ -29,7 +30,7 @@ function SingleComment(props) {
         }
 
 
-        Axios.post('/api/comment/saveComment', variables)
+        axios.post('/api/comment/saveComment', variables)
             .then(response => {
                 if (response.data.success) {
                     setCommentValue("")
