@@ -56,7 +56,7 @@ function VideoDetailPage(props) {
 
                         <List.Item
                             actions={[
-                            <LikeDislikes   />, 
+                            <LikeDislikes video={videoId} userId={localStorage.getItem('userId')} />, 
                             
                             <Subscriber userTo={Video.writer._id} userFrom={localStorage.getItem('userId')} />]}
                         >
