@@ -23,7 +23,7 @@ function ReplyComment(props) {
         setChildCommentNumber(commentNumber)
 
         //DOM...한번 돌때만 실행되는 것
-    }, [props.CommentLists])
+    }, [props.CommentLists, props.parentCommentId])
     //CommentLists는 부모로부터 오는 것임. VideoDetailPage.js
     // VideoDetailPager가 바뀔 때마다 전체 부분을 다시 실행하라는 의미
 

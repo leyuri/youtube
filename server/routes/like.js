@@ -9,41 +9,138 @@ const { auth } = require("../middleware/auth");
 //             Likes DisLikes
 //=================================
 
-router.post("/getLies", (req,res)=> {
-    
-    let variable = { }
-    if(req.body.videoId) {
-        variable = { videoId: req.body.videoId}
+router.post("/getLikes", (req, res) => {
+
+    let variable = {}
+    if (req.body.videoId) {
+        variable = { videoId: req.body.videoId }
     } else {
-        variable = { commentId: req.body.commentId}
+        variable = { commentId: req.body.commentId }
     }
 
     Like.find(variable)
-    .exec((err, likes) => {
-        if(err) return res.status(400).send(err);
-        res.status(200).json({ success: true, likes })
-    })
+        .exec((err, likes) => {
+            if (err) return res.status(400).send(err);
+            res.status(200).json({ success: true, likes })
+        })
 
 
 })
 
 
-router.post("/getDislikes", (req,res)=> {
-    
-    let variable = { }
-    if(req.body.videoId) {
-        variable = { videoId: req.body.videoId}
+router.post("/getDislikes", (req, res) => {
+
+    let variable = {}
+    if (req.body.videoId) {
+        variable = { videoId: req.body.videoId }
     } else {
-        variable = { commentId: req.body.commentId}
+        variable = { commentId: req.body.commentId }
     }
 
-    DisLike.find(variable)
-    .exec((err, dislikes) => {
-        if(err) return res.status(400).send(err);
-        res.status(200).json({ success: true, dislikes })
+    Dislike.find(variable)
+        .exec((err, dislikes) => {
+            if (err) return res.status(400).send(err);
+            res.status(200).json({ success: true, dislikes })
+        })
+
+})
+
+
+router.post("/upLike", (req, res) => {
+
+    let variable = {}
+    if (req.body.videoId) {
+        variable = { videoId: req.body.videoId, userId: req.body.userId }
+    } else {
+        variable = { commentId: req.body.commentId , userId: req.body.userId }
+    }
+
+    const like = new Like(variable)
+
+    //몽고디비에 like 정보 집어넣기
+    like.save((err, likeResult) => {
+        if (err) return res.json({ success: false, err });
+        //like button이 이미 클릭된 경우 dislike를 줄여야 함
+        Dislike.findOneAndDelete(variable)
+            .exec((err, disLikeResult) => {
+                if (err) return res.status(400).json({ success: false, err });
+                res.status(200).json({ success: true })
+            })
     })
 
 })
+
+
+
+
+router.post("/unLike", (req, res) => {
+
+    let variable = {}
+    if (req.body.videoId) {
+        variable = { videoId: req.body.videoId, userId: req.body.userId }
+    } else {
+        variable = { commentId: req.body.commentId , userId: req.body.userId }
+    }
+
+    Like.findOneAndDelete(variable)
+        .exec((err, result) => {
+            if (err) return res.status(400).json({ success: false, err })
+            res.status(200).json({ success: true })
+        })
+
+})
+
+
+router.post("/unDisLike", (req, res) => {
+
+    let variable = {}
+    if (req.body.videoId) {
+        variable = { videoId: req.body.videoId, userId: req.body.userId }
+    } else {
+        variable = { commentId: req.body.commentId , userId: req.body.userId }
+    }
+
+    Dislike.findOneAndDelete(variable)
+    .exec((err, result) => {
+        if (err) return res.status(400).json({ success: false, err })
+        res.status(200).json({ success: true })
+    })
+
+
+})
+
+
+
+router.post("/upDisLike", (req, res) => {
+
+    let variable = {}
+    if (req.body.videoId) {
+        variable = { videoId: req.body.videoId, userId: req.body.userId }
+    } else {
+        variable = { commentId: req.body.commentId , userId: req.body.userId }
+    }
+
+    const disLike = new Dislike(variable)
+    disLike.save((err, dislikeResult) => {
+        if (err) return res.json({ success: false, err });
+        Like.findOneAndDelete(variable)
+            .exec((err, likeResult) => {
+                if (err) return res.status(400).json({ success: false, err });
+                res.status(200).json({ success: true })
+            })
+    })
+
+
+})
+
+
+
+
+
+
+
+
+
 
 
 
