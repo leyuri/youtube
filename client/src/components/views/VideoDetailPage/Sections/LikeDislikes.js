@@ -1,61 +1,80 @@
-import React , { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Tooltip, Icon } from 'antd';
-import axios from 'axios';
-import { response } from 'express';
+import Axios from 'axios';
 
 function LikeDislikes(props) {
 
-
-    let variable = { }
+    const [Likes, setLikes] = useState(0)
+    const [Dislikes, setDislikes] = useState(0)
+    const [LikeAction, setLikeAction] = useState(null)
+    const [DislikeAction, setDislikeAction] = useState(null)
+    let variable = {};
 
     //VideoDetailPage에서 가져와야 함...
-    if(props.video) {
-        variable = { videoId: props.videoId, userId: props.userId}
+    if (props.video) {
+        variable = { videoId: props.videoId, userId: props.userId }
     } else {
-        variable = { commentId: , userId: }
+        variable = { commentId: props.commentId, userId: props.userId }
     }
 
     // 현재 좋아요 싫어요에 대한 정보를 db에서 가져오기
     useEffect(() => {
 
-        axios.post('/api/like/getLikes', variable)
-        .then(response=> {
-            if(response.data.success) {
+        Axios.post('/api/like/getLikes', variable)
+            .then(response => {
+                if (response.data.success) {
+                    //How many likes does this video or comment have 
+                    setLikes(response.data.likes.length)
 
-            } else {
-                alert('Failed to get Likes info')
-            }
-        })
+                    //if I already click this like button or not 
+                    response.data.likes.map(like => {
+                        if (like.userId === props.userId) {
+                            setLikeAction('liked')
+                        }
+                    })
+                } else {
+                    alert('Failed to get likes')
+                }
+            })
 
+        Axios.post('/api/like/getDislikes', variable)
+            .then(response => {
+                if (response.data.success) {
+                    //How many likes does this video or comment have 
+                    setDislikes(response.data.dislikes.length)
 
+                    //if I already click this like button or not 
+                    response.data.dislikes.map(like => {
+                        if (like.userId === props.userId) {
+                            setDislikeAction('disliked')
+                        }
+                    })
+                } else {
+                    alert('Failed to get dislikes')
+                }
+            })
 
-
-        
-        return () => {
-            cleanup
-        };
-    }, [input])
-
+    }, [])
 
     return (
         <React.Fragment>
             <span key="comment-basic-like">
                 <Tooltip title="Like">
                     <Icon type="like"
-                        theme="filled"
+                        theme={LikeAction === 'liked' ? 'filled' : 'outlined'}
                         onClick />
                 </Tooltip>
-                <span style={{ paddingLeft: '8px', cursor: 'auto' }}></span>
+                <span style={{ paddingLeft: '8px', cursor: 'auto' }}>{Likes}</span>
             </span>&nbsp;&nbsp;
             <span key="comment-basic-dislike">
                 <Tooltip title="Dislike">
                     <Icon
                         type="dislike"
-                        theme="outlined"
+                        theme={DislikeAction === 'disliked' ? 'filled' : 'outlined'  } 
                         onClick
                     />
                 </Tooltip>
-                <span style={{ paddingLeft: '8px', cursor: 'auto' }}></span>
+                <span style={{ paddingLeft: '8px', cursor: 'auto' }}>{Dislikes}</span>
             </span>
         </React.Fragment>
     )
