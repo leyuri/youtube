@@ -47,6 +47,7 @@ app.use('/uploads', express.static('uploads'));
 if (process.env.NODE_ENV === "production") {
 
   // Set static folder
+  // all the javascript and css files will be read and served from thif folder
   app.use(express.static("client/build"));
 
   // index.html for all page routes
