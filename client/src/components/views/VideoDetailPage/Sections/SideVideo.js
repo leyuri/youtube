@@ -44,7 +44,10 @@ function SideVideo() {
     })
 
     return (
+
+
         <React.Fragment>
+            <div style={{ marginTop:'3rem', paddingLeft: '3rem' }}> Recommended videos </div>
             <div style={{ marginTop:'3rem' }}></div>
             {sideVideoItem}
 
