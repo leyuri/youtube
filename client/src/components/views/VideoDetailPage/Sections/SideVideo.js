@@ -28,7 +28,10 @@ function SideVideo() {
        return <div style={{ display: 'flex', marginTop: '1rem', padding: '0 2rem' }}>
         <div style={{ width:'85%', marginRight:'1rem' }}>
             <a href={`/video/${video._id}`}  style={{ color:'gray' }}>
-                <img style={{ width: '100%' }} src={`http://localhost:5000/${video.thumbnail}`} alt="thumbnail" />
+                <img style={{ width: '100%' }} src={`https://agile-peak-59602.herokuapp.com/${video.thumbnail}`} alt="thumbnail" />
+                {/* <img style={{ width: '100%' }} src={`http://localhost:5000/${video.thumbnail}`} alt="thumbnail" /> */}
+
+                {/* `https://agile-peak-59602.herokuapp.com/${video.thumbnail}` */}
             </a>
         </div>
 

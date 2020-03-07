@@ -52,7 +52,9 @@ function VideoDetailPage(props) {
             <Row>
                 <Col lg={18} xs={24}>
                     <div className="postPage" style={{ width: '100%', padding: '3rem 4em' }}>
-                        <video style={{ width: '100%' }} src={`http://localhost:5000/${Video.filePath}`} controls></video>
+                        <video style={{ width: '100%' }} src={`https://agile-peak-59602.herokuapp.com/${Video.filePath}`} controls></video>
+
+                        {/* <video style={{ width: '100%' }} src={`http://localhost:5000/${Video.filePath}`} controls></video> */}
 
                         <List.Item
                             actions={[<LikeDislikes video videoId={videoId} userId={localStorage.getItem('userId')}  />, <Subscriber userTo={Video.writer._id} userFrom={localStorage.getItem('userId')} />]}

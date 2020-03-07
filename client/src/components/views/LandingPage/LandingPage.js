@@ -25,6 +25,11 @@ function LandingPage() {
 
 
     //카드모양의 형식...
+
+    
+    
+
+
     const renderCards = Videos.map((video, index) => {
         // 동영상 계산을 미리 해줌
         var minutes = Math.floor(video.duration / 60);
@@ -33,7 +38,16 @@ function LandingPage() {
         return <Col lg={6} md={8} xs={24}>
             <div style={{ position: 'relative' }}>
                 <a href={`/video/${video._id}`} >
-                <img style={{ width: '100%' }} alt="thumbnail" src={`http://localhost:5000/${video.thumbnail}`} />
+
+                    
+                <img style={{ width: '100%' }} alt="thumbnail" 
+                
+                src={`https://agile-peak-59602.herokuapp.com/${video.thumbnail}`}/>
+
+                {/* // src={`http://VideoUploadPage
+                // https://agile-peak-59602.herokuapp.com/ */}
+                
+              
                 <div className=" duration"
                     style={{ bottom: 0, right:0, position: 'absolute', margin: '4px', 
                     color: '#fff', backgroundColor: 'rgba(17, 17, 17, 0.8)', opacity: 0.8, 

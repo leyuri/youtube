@@ -151,7 +151,9 @@ function VideoUploadPage(props) {
 
                     {Thumbnail !== "" &&
                         <div>
-                            <img src={`http://localhost:5000/${Thumbnail}`} alt="haha" />
+                            <img src={`https://agile-peak-59602.herokuapp.com/${video.thumbnail}`} alt="haha" />
+                            {/* <img src={`http://localhost:5000/${Thumbnail}`} alt="haha" /> */}
+                            {/* `https://agile-peak-59602.herokuapp.com/${video.thumbnail}` */}
                         </div>
                     }
                 </div>
