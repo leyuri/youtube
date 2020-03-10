@@ -46,13 +46,17 @@ function VideoDetailPage(props) {
         setCommentLists(CommentLists.concat(newComment))
     }
 
+    let src= process.env.NODE_ENV === 'development' ? 
+    `http://localhost:5000/${Video.filePath}`
+    : `https://agile-peak-59602.herokuapp.com/${Video.filePath}`
+
 
     if (Video.writer) {
         return (
             <Row>
                 <Col lg={18} xs={24}>
                     <div className="postPage" style={{ width: '100%', padding: '3rem 4em' }}>
-                        <video style={{ width: '100%' }} src={`https://agile-peak-59602.herokuapp.com/${Video.filePath}`} controls></video>
+                        <video style={{ width: '100%' }} src={src} controls></video>
 
 
 

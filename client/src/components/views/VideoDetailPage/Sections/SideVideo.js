@@ -25,10 +25,15 @@ function SideVideo() {
         var minutes = Math.floor(video.duration / 60);
         var seconds = Math.floor(video.duration - minutes * 60);
 
+        let src= process.env.NODE_ENV === 'development' ? 
+        `http://localhost:5000/${video.thumbnail}` 
+        : `https://agile-peak-59602.herokuapp.com/${video.thumbnail}`
+    
+
        return <div style={{ display: 'flex', marginTop: '1rem', padding: '0 2rem' }}>
         <div style={{ width:'85%', marginRight:'1rem' }}>
             <a href={`/video/${video._id}`}  style={{ color:'gray' }}>
-                <img style={{ width: '100%' }} src={`https://agile-peak-59602.herokuapp.com/${video.thumbnail}`} alt="thumbnail" />
+                <img style={{ width: '100%' }} src={src} alt="thumbnail" />
  
             </a>
         </div>

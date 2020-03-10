@@ -126,6 +126,11 @@ function VideoUploadPage(props) {
 
     }
 
+    let src= process.env.NODE_ENV === 'development' ? 
+    `http://localhost:5000/${Thumbnail}`
+    : `https://agile-peak-59602.herokuapp.com/${Thumbnail}`
+
+
     return (
         <div style={{ maxWidth: '700px', margin: '2rem auto' }}>
             <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
@@ -151,7 +156,7 @@ function VideoUploadPage(props) {
 
                     {Thumbnail !== "" &&
                         <div>
-                            <img src={`https://agile-peak-59602.herokuapp.com/${Thumbnail}`} alt="haha" />
+                            <img src={src} alt="haha" />
                         </div>
                     }
                 </div>

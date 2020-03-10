@@ -46,7 +46,7 @@ function LandingPage() {
             <div style={{ position: 'relative' }}>
                 <a href={`/video/${video._id}`} >
                     
-                <img style={{ width: '100%' }} alt="thumbnail" />
+                <img style={{ width: '100%' }} alt="thumbnail" src={src}/>
             
                 <div className=" duration"
                     style={{ bottom: 0, right:0, position: 'absolute', margin: '4px', 
