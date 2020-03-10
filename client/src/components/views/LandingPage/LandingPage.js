@@ -35,19 +35,19 @@ function LandingPage() {
         var minutes = Math.floor(video.duration / 60);
         var seconds = Math.floor(video.duration - minutes * 60);
         //6*4=24  8*3=24
+
+
+
+        let src= process.env.NODE_ENV === 'development' ? 
+        `http://localhost:5000/${video.thumbnail}` 
+        : `https://agile-peak-59602.herokuapp.com/${video.thumbnail}`
+
         return <Col lg={6} md={8} xs={24}>
             <div style={{ position: 'relative' }}>
                 <a href={`/video/${video._id}`} >
-
                     
-                <img style={{ width: '100%' }} alt="thumbnail" 
-                
-                src={`https://agile-peak-59602.herokuapp.com/${video.thumbnail}`}/>
-
-                {/* // src={`http://VideoUploadPage
-                // https://agile-peak-59602.herokuapp.com/ */}
-                
-              
+                <img style={{ width: '100%' }} alt="thumbnail" />
+            
                 <div className=" duration"
                     style={{ bottom: 0, right:0, position: 'absolute', margin: '4px', 
                     color: '#fff', backgroundColor: 'rgba(17, 17, 17, 0.8)', opacity: 0.8, 

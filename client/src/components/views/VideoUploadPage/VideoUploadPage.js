@@ -25,34 +25,34 @@ function VideoUploadPage(props) {
 
     const [title, setTitle] = useState("");
     const [Description, setDescription] = useState("");
-    const [Privacy, setPrivacy] = useState(0)
-    const [Categories, setCategories] = useState("Film & Animation") //기본설정
+    const [privacy, setPrivacy] = useState(0)
+    const [Categories, setCategories] = useState("Film & Animation")
     const [FilePath, setFilePath] = useState("")
     const [Duration, setDuration] = useState("")
     const [Thumbnail, setThumbnail] = useState("")
 
 
-    const handleChangeTitle = (e) => {
-        setTitle(e.currentTarget.value)
+    const handleChangeTitle = (event) => {
+        setTitle(event.currentTarget.value)
     }
 
-    const handleChangeDecsription = (e) => {
-        console.log(e.currentTarget.value)
+    const handleChangeDecsription = (event) => {
+        console.log(event.currentTarget.value)
 
-        setDescription(e.currentTarget.value)
+        setDescription(event.currentTarget.value)
     }
 
-    const handleChangeOne = (e) => {
-        setPrivacy(e.currentTarget.value)
+    const handleChangeOne = (event) => {
+        setPrivacy(event.currentTarget.value)
     }
 
-    const handleChangeTwo = (e) => {
-        setCategories(e.currentTarget.value)
+    const handleChangeTwo = (event) => {
+        setCategories(event.currentTarget.value)
     }
 
-    const onSubmit = (e) => {
+    const onSubmit = (event) => {
 
-        e.preventDefault();
+        event.preventDefault();
 
         if (user.userData && !user.userData.isAuth) {
             return alert('Please Log in First')
@@ -68,7 +68,7 @@ function VideoUploadPage(props) {
             writer: user.userData._id,
             title: title,
             description: Description,
-            privacy: Privacy,
+            privacy: privacy,
             filePath: FilePath,
             category: Categories,
             duration: Duration,
@@ -151,9 +151,7 @@ function VideoUploadPage(props) {
 
                     {Thumbnail !== "" &&
                         <div>
-                            <img src={`https://agile-peak-59602.herokuapp.com/${video.thumbnail}`} alt="haha" />
-                            {/* <img src={`http://localhost:5000/${Thumbnail}`} alt="haha" /> */}
-                            {/* `https://agile-peak-59602.herokuapp.com/${video.thumbnail}` */}
+                            <img src={`https://agile-peak-59602.herokuapp.com/${Thumbnail}`} alt="haha" />
                         </div>
                     }
                 </div>
@@ -186,7 +184,7 @@ function VideoUploadPage(props) {
                 </select>
                 <br /><br />
 
-                <Button type="primary" size="large" onClick={onSubmit} ghost>
+                <Button type="primary" size="large" onClick={onSubmit}>
                     Submit
             </Button>
 
