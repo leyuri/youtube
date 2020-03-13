@@ -1,7 +1,7 @@
 # youtube
 
 ### Development environment
-- react + node.js
+- React + Redux + node.js
 - mongoDB + heroku
 
 ### Features
